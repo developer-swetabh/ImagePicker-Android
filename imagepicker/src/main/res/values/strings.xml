@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ImagePicker</string>
+    <string name="Camera">Camera</string>
+    <string name="Gallery">Gallery</string>
+    <string name="storage_denial">Storage permission is required in order to proceed,Please grant the permission in Application settings</string>
+    <!--<string name="provider_authorities">imagepicker.fileprovider</string>-->
+</resources>

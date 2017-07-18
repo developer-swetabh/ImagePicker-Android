@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ImagePickerExample</string>
+    <string name="provider_authorities">com.imagepicker.provider</string>
+</resources>
