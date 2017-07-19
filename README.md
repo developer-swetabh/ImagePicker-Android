@@ -21,7 +21,7 @@ dependencies {
 
 ### Initializing the library
 
-For start using the ImagePicker library, First you need to add the dependency as shown above. Right after that, In your activity first you need to create the Object of ImagePicker class.
+For start using the [ImagePicker-Library](https://github.com/developer-swetabh/ImagePicker-Android), First you need to add the dependency as shown above. Right after that, In your activity first you need to create the Object of `ImagePicker` class.
 
 ```java
 public class MainActivity extends AppCompatActivity {
