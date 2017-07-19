@@ -1,1 +1,2 @@
 # ImagePicker-Android
+This ImagePicker Library for android can be used to pick images either from camera or gallery. This library enforces you to implement file provider so that your app will work in Nougat (Android 7) as well as previous versions android without any issues. No need to handle required permessions explicitly (like storage or camera permission). This Library currently works for single image picker, multiple image selection is under progress..
