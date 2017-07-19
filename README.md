@@ -49,8 +49,9 @@ Make sure that the authorities string matches with the string you are passing to
 ```
 
 ```java
-ImagePicker picker = new ImagePicker(MainActivity.this, getString(R.string.authorities));
+ImagePicker picker = new ImagePicker(MainActivity.this, R.string.authorities);
 ```
+
 In the meta-data section of the provider definition, you can see that the provider expects eligible paths to be configured in a dedicated resource file, res/xml/file_paths.xml. Here is the content required for this particular example:
 
 ```xml
