@@ -22,4 +22,42 @@ dependencies {
 
 For more recent apps targeting Android 7.0 (API level 24) and higher, passing a file:// URI across a package boundary causes a [FileUriExposedException](https://developer.android.com/reference/android/os/FileUriExposedException.html). Therefore, we are now using more generic way of storing images using a FileProvider.
 
+This is how you can configure your FileProvider. In your app's manifest, add a provider to your application:
+
+```xml
+<application>
+   ...
+   <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="@string/authorities"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths"></meta-data>
+    </provider>
+    ...
+</application>
+```
+
+Make sure that the authorities string matches with the string you are passing to constructor of library as follow. It would be better to store authorities string in strings.xml file to reduce the conflicts. 
+
+```xml
+<resources>
+    <string name="authorities">com.example.android.fileprovider</string>
+</resources
+```
+
+```java
+ImagePicker picker = new ImagePicker(MainActivity.this, getString(R.string.authorities));
+```
+In the meta-data section of the provider definition, you can see that the provider expects eligible paths to be configured in a dedicated resource file, res/xml/file_paths.xml. Here is the content required for this particular example:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="my_images" path="Android/data/com.example.package.name/files/Pictures" />
+</paths>
+```
+
 For more detail on how to create a file provider, you can refer [Google's Android Documentation](https://developer.android.com/training/camera/photobasics.html)
