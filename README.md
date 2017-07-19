@@ -60,7 +60,7 @@ private void pickFromGallery() {
 
 ### Getting the Result
 
-For getting the results or the path of the image you have selected, you should override the Activity's onActivityResult() as shown below..
+For getting the results or the path of the image you have selected, you should override the Activity's `onActivityResult()` as shown below..
 
 ```java
 @Override
@@ -78,9 +78,9 @@ For getting the results or the path of the image you have selected, you should o
 
 # Creating File Provider
 
-For more recent apps targeting Android 7.0 (API level 24) and higher, passing a file:// URI across a package boundary causes a [FileUriExposedException](https://developer.android.com/reference/android/os/FileUriExposedException.html). Therefore, we are now using more generic way of storing images using a FileProvider.
+For more recent apps targeting Android 7.0 (API level 24) and higher, passing a file:// URI across a package boundary causes a [FileUriExposedException](https://developer.android.com/reference/android/os/FileUriExposedException.html). Therefore, we are now using more generic way of storing images using a [FileProvider](https://developer.android.com/reference/android/support/v4/content/FileProvider.html).
 
-This is how you can configure your FileProvider. In your app's manifest, add a provider to your application:
+This is how you can configure your [FileProvider](https://developer.android.com/reference/android/support/v4/content/FileProvider.html). In your app's `Manifest`, add a provider to your application:
 
 ```xml
 <application>
@@ -98,7 +98,7 @@ This is how you can configure your FileProvider. In your app's manifest, add a p
 </application>
 ```
 
-Make sure that the authorities string matches with the string you are passing to constructor of library as follow. It would be better to store authorities string in strings.xml file to reduce the conflicts. 
+Make sure that the authorities string matches with the string you are passing to constructor of library as follow. It would be better to store authorities string in `strings.xml` file to reduce the conflicts. 
 
 ```xml
 <resources>
@@ -110,7 +110,7 @@ Make sure that the authorities string matches with the string you are passing to
 ImagePicker picker = new ImagePicker(MainActivity.this, R.string.authorities);
 ```
 
-In the meta-data section of the provider definition, you can see that the provider expects eligible paths to be configured in a dedicated resource file, res/xml/file_paths.xml. Here is the content required for this particular example:
+In the meta-data section of the provider definition, you can see that the provider expects eligible paths to be configured in a dedicated resource file, `res/xml/file_paths.xml`. Here is the content required for this particular example:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
