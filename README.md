@@ -17,6 +17,64 @@ dependencies {
     compile 'com.swetabh.imagepicker:imagepicker:0.1.0'
 }
 ```
+# Using ImagePicker Library
+
+### Initializing the library
+
+For start using the ImagePicker library, First you need to add the dependency as shown above. Right after that, In your activity first you need to create the Object of ImagePicker class.
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    public ImagePicker mImagePicker;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+	//Initialize here with context and string for authorities
+	mImagePicker = new ImagePicker(MainActivity.this, "Your Authorities String");
+    }
+}
+```
+
+### Using the Library
+
+Now you can use the mImagePicker object to use the library as shown below.
+
+For Camera..
+
+```java
+private void pickFromCamera() {
+	mImagePicker.pickImageFromCamera();
+}
+```
+
+For Gallery..
+
+```java
+private void pickFromGallery() {
+	mImagePicker.pickImageFromGallery();
+}
+```
+
+### Getting the Result
+
+For getting the results or the path of the image you have selected, you should override the Activity's onActivityResult() as shown below..
+
+```java
+@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String imagePath = mImagePicker.onActivityResult(requestCode, resultCode, data);
+        
+        if(imagePath != null){
+		Log.d("PickedImagePath", imagePath);
+	}
+	
+	//use imagePath variable to show image
+	
+    }
+```
 
 # Creating File Provider
 
