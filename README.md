@@ -22,4 +22,4 @@ dependencies {
 
 For more recent apps targeting Android 7.0 (API level 24) and higher, passing a file:// URI across a package boundary causes a [FileUriExposedException](https://developer.android.com/reference/android/os/FileUriExposedException.html). Therefore, we are now using more generic way of storing images using a FileProvider.
 
-For more detail on how to create a file provider, you can refer [here..](https://developer.android.com/training/camera/photobasics.html)
+For more detail on how to create a file provider, you can refer [Google's Android Documentation](https://developer.android.com/training/camera/photobasics.html)
