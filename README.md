@@ -60,4 +60,4 @@ In the meta-data section of the provider definition, you can see that the provid
 </paths>
 ```
 
-For more detail on how to create a file provider, you can refer [Google's Android Documentation](https://developer.android.com/training/camera/photobasics.html)
+For more detail on how to create a file provider, you can refer [Google's Android Documentation](https://developer.android.com/reference/android/support/v4/content/FileProvider.html)
