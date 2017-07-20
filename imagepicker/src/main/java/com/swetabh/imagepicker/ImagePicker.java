@@ -31,27 +31,35 @@ public class ImagePicker {
     private final int GALLERY_RESULT_CODE = 901, CAMERA_RESULT_CODE = 902;
     private final String IMAGE_MIME_TYPE = "image/*";
     private final String TAG = ImagePicker.class.getSimpleName();
-    // private final String PROVIDER_AUTHORITY = "imagepicker.fileprovider";
     private final String PROVIDER_AUTHORITY;
     private WeakReference<Activity> activityWeakReference;
     private String mCurrentPhotoPath;
 
-    public ImagePicker(@NonNull Activity activity) {
-        activityWeakReference = new WeakReference<Activity>(activity);
-        PROVIDER_AUTHORITY = activityWeakReference.get().getPackageName();
-    }
-
+    /**
+     * Constructor to take
+     *
+     * @param activity     - for reference from where it is called
+     * @param providerName - provider name
+     */
     public ImagePicker(@NonNull Activity activity, @NonNull int providerName) {
         activityWeakReference = new WeakReference<Activity>(activity);
         PROVIDER_AUTHORITY = activityWeakReference.get().getString(providerName);
     }
 
+    /*
+    * method to check permission of external storage
+    * */
     public boolean checkPermission(Activity activity) {
         return ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
 
+    /**
+     * method for creating file name
+     *
+     * @param activity
+     */
     private File createImageFile(Activity activity) throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -170,6 +178,11 @@ public class ImagePicker {
         return null;
     }
 
+    /**
+     * method to get real path from uri
+     *
+     * @param contentURI
+     */
     private String getRealPathFromURI(Uri contentURI) {
         String result = null;
         Activity activity = activityWeakReference.get();

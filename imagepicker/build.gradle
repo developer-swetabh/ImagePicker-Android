@@ -1,5 +1,30 @@
 apply plugin: 'com.android.library'
 
+
+ext {
+    bintrayRepo = 'ImagePicker'
+    bintrayName = 'imagepicker'
+
+    publishedGroupId = 'com.swetabh.imagepicker'
+    libraryName = 'ImagePicker'
+    artifact = 'imagepicker'
+
+    libraryDescription = 'A library to pick image from camera or gallery'
+
+    siteUrl = 'https://github.com/developer-swetabh/ImagePicker-Android'
+    gitUrl = 'https://github.com/developer-swetabh/ImagePicker-Android.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'developerId'
+    developerName = 'Swetabh Suman'
+    developerEmail = 'suman.swetabh@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -29,3 +54,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
