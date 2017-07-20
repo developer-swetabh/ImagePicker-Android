@@ -9,7 +9,7 @@ This ImagePicker Library for android can be used to pick images either from **Ca
 The Gradle dependency is available via [jCenter](https://bintray.com/swetabh-suman/ImagePicker/imagepicker).
 jCenter is the default Maven repository used by Android Studio.
 
-The minimum API level supported by this library is API 16 (JellyBean).
+The minimum API level supported by this library is **API 16 (JellyBean)**.
 
 ```gradle
 dependencies {
@@ -75,6 +75,8 @@ For getting the results or the path of the image you have selected, you should o
 	
     }
 ```
+
+Kindly check the sample provided in the library for more clarification on how to use.
 
 # Creating File Provider
 
