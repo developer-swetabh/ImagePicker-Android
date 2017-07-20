@@ -1,6 +1,6 @@
 # ImagePicker-Android
 
-This ImagePicker Library for android can be used to pick images either from camera or gallery. This library enforces you to implement file provider so that your app will work in Nougat (Android 7) as well as previous versions of android without any issues. No need to handle required permessions explicitly (like storage or camera permission). This Library currently works for single image picker, multiple image selection is under progress..
+This ImagePicker Library for android can be used to pick images either from **Camera** or **Gallery**. This library enforces you to implement file provider so that your app will work in **Nougat (Android 7)** as well as previous versions of android without any issues. **No need to handle required permessions explicitly (like storage or camera permission)**. This Library currently works for single image picker, multiple image selection is under progress..
 
 # Gradle Dependency
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 ### Using the Library
 
-Now you can use the mImagePicker object to use the library as shown below.
+Now you can use the `mImagePicker` object to use the library as shown below.
 
 For Camera..
 
@@ -78,7 +78,7 @@ For getting the results or the path of the image you have selected, you should o
 
 # Creating File Provider
 
-For more recent apps targeting Android 7.0 (API level 24) and higher, passing a file:// URI across a package boundary causes a [FileUriExposedException](https://developer.android.com/reference/android/os/FileUriExposedException.html). Therefore, we are now using more generic way of storing images using a [FileProvider](https://developer.android.com/reference/android/support/v4/content/FileProvider.html).
+For more recent apps targeting **Android 7.0 (API level 24) and higher**, passing a `file://` URI across a package boundary causes a [FileUriExposedException](https://developer.android.com/reference/android/os/FileUriExposedException.html). Therefore, we are now using more generic way of storing images using a [FileProvider](https://developer.android.com/reference/android/support/v4/content/FileProvider.html).
 
 This is how you can configure your [FileProvider](https://developer.android.com/reference/android/support/v4/content/FileProvider.html). In your app's `Manifest`, add a provider to your application:
 
@@ -98,7 +98,7 @@ This is how you can configure your [FileProvider](https://developer.android.com/
 </application>
 ```
 
-Make sure that the authorities string matches with the string you are passing to constructor of library as follow. It would be better to store authorities string in `strings.xml` file to reduce the conflicts. 
+Make sure that the authorities string matches with the string you are passing to constructor of library as follow. It would be better to store authorities string in `strings.xml` file to reduce the chances of conflicts. 
 
 ```xml
 <resources>
