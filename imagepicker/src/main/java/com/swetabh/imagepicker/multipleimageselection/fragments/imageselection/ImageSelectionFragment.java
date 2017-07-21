@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.ActionMode;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -15,8 +18,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.swetabh.imagepicker.R;
+import com.swetabh.imagepicker.multipleimageselection.activities.MultipleImagePickerActivity;
 import com.swetabh.imagepicker.multipleimageselection.activities.MultipleImagePickerContract;
 import com.swetabh.imagepicker.multipleimageselection.adapters.CustomImageSelectAdapter;
 import com.swetabh.imagepicker.multipleimageselection.constants.LibConstant;
@@ -42,7 +47,8 @@ public class ImageSelectionFragment extends Fragment implements MultipleImagePic
     private CustomImageSelectAdapter adapter;
     private Context mContext;
     private ActionMode actionMode;
-    private ActionMode.Callback callback;
+    private ActionModeCallback actionModeCallback;
+
     private int countSelected;
 
 
@@ -67,6 +73,7 @@ public class ImageSelectionFragment extends Fragment implements MultipleImagePic
         View view = inflater.inflate(R.layout.fragment_image_selection, container, false);
         album = getArguments().getString(LibConstant.INTENT_EXTRA_ALBUM);
         initializeView(view);
+        actionModeCallback = new ActionModeCallback();
         return view;
     }
 
@@ -79,9 +86,35 @@ public class ImageSelectionFragment extends Fragment implements MultipleImagePic
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (actionMode == null) {
+                    actionMode = ((MultipleImagePickerActivity) mContext).startSupportActionMode(actionModeCallback);
+                }
+                toggleSelection(position);
+                actionMode.setTitle(String.valueOf(countSelected));
 
+                if (countSelected == 0) {
+                    actionMode.finish();
+                }
             }
         });
+    }
+
+    private void toggleSelection(int position) {
+        if (!images.get(position).isSelected && countSelected >= LibConstant.limit) {
+            Toast.makeText(
+                    mContext,
+                    String.format(getString(R.string.limit_exceeded), LibConstant.limit),
+                    Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+        images.get(position).isSelected = !images.get(position).isSelected;
+        if (images.get(position).isSelected) {
+            countSelected++;
+        } else {
+            countSelected--;
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -92,7 +125,6 @@ public class ImageSelectionFragment extends Fragment implements MultipleImagePic
             mPresenter.loadImages(mContext, album, images);
         }
     }
-
 
     @Override
     public void setPresenter(MultipleImagePickerContract.ImageSelectionPresenter presenter) {
@@ -122,13 +154,18 @@ public class ImageSelectionFragment extends Fragment implements MultipleImagePic
     }
 
     @Override
-    public void fetchCompleted(ArrayList<Image> images) {
+    public void fetchCompleted(ArrayList<Image> images, int tempCountSelected) {
         if (adapter == null) {
-            adapter = new CustomImageSelectAdapter(mContext, images);
+            this.images = images;
+            adapter = new CustomImageSelectAdapter(mContext, this.images);
             gridView.setAdapter(adapter);
         } else {
-            adapter.addImages(images);
+            adapter.addImages(this.images);
             adapter.notifyDataSetChanged();
+            if (actionMode != null) {
+                countSelected = tempCountSelected;
+                actionMode.setTitle(String.valueOf(countSelected));
+            }
         }
         progressBar.setVisibility(View.INVISIBLE);
         gridView.setVisibility(View.VISIBLE);
@@ -145,5 +182,70 @@ public class ImageSelectionFragment extends Fragment implements MultipleImagePic
             adapter.setLayoutParams(size);
         }
         gridView.setNumColumns(orientation == Configuration.ORIENTATION_PORTRAIT ? 3 : 5);
+    }
+
+    private void sendIntent() {
+        mCommunicator.sendBackResult(getSelectedImagesPath());
+    }
+
+    private ArrayList<String> getSelectedImagesPath() {
+        ArrayList<String> selectedImages = new ArrayList<>();
+        for (int i = 0, l = images.size(); i < l; i++) {
+            if (images.get(i).isSelected) {
+                selectedImages.add(images.get(i).path);
+            }
+        }
+        return selectedImages;
+    }
+
+    private void deselectAll() {
+        for (int i = 0, l = images.size(); i < l; i++) {
+            images.get(i).isSelected = false;
+        }
+        countSelected = 0;
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        images = null;
+        if (adapter != null) {
+            adapter.releaseResources();
+        }
+    }
+
+    private class ActionModeCallback implements ActionMode.Callback {
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.menu_action_mode, menu);
+            countSelected = 0;
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            int i = item.getItemId();
+            if (i == R.id.menu_item_add_image) {
+                sendIntent();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            if (countSelected > 0) {
+                deselectAll();
+            }
+            actionMode = null;
+        }
     }
 }

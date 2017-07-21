@@ -15,7 +15,8 @@ import java.util.HashSet;
  * Created by swets on 20-07-2017.
  */
 
-public class AlbumLoadRunnable implements Runnable {
+public class AlbumLoadRunnable implements Runnable
+{
 
     private final AlbumResultCallback mCallback;
     private final String[] projection = new String[]{

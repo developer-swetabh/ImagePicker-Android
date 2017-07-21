@@ -36,9 +36,9 @@ public class ImageSelectionPresenterImp extends BasePresenterImp<MultipleImagePi
     }
 
     @Override
-    public void fetchCompleted(ArrayList<Image> images) {
+    public void fetchCompleted(ArrayList<Image> images, int tempCountSelected) {
         if (mView != null) {
-            mView.fetchCompleted(images);
+            mView.fetchCompleted(images,tempCountSelected);
         }
     }
 }

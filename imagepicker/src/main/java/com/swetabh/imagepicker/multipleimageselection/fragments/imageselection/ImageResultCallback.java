@@ -14,5 +14,5 @@ public interface ImageResultCallback {
     void errorOccured();
 
 
-    void fetchCompleted(ArrayList<Image> images);
+    void fetchCompleted(ArrayList<Image> images, int tempCountSelected);
 }

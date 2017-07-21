@@ -25,6 +25,7 @@ public class ImageLoadAsync extends AsyncTask<Void, Void, ArrayList<Image>> {
     private ImageResultCallback mCallback;
     private String mAlbum;
     private ArrayList<Image> images;
+    private int tempCountSelected;
 
 
     public ImageLoadAsync(Context context, ImageResultCallback callback, String album, ArrayList<Image> images) {
@@ -32,6 +33,7 @@ public class ImageLoadAsync extends AsyncTask<Void, Void, ArrayList<Image>> {
         mCallback = callback;
         mAlbum = album;
         this.images = images;
+        tempCountSelected = 0;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class ImageLoadAsync extends AsyncTask<Void, Void, ArrayList<Image>> {
             tempCountSelected keeps track of number of selected images. On handling
             FETCH_COMPLETED message, countSelected is assigned value of tempCountSelected.
              */
-        int tempCountSelected = 0;
+        tempCountSelected = 0;
         ArrayList<Image> temp = new ArrayList<>(cursor.getCount());
         if (cursor.moveToLast()) {
             do {
@@ -105,7 +107,7 @@ public class ImageLoadAsync extends AsyncTask<Void, Void, ArrayList<Image>> {
         if(images == null){
             mCallback.errorOccured();
         }else {
-            mCallback.fetchCompleted(images);
+            mCallback.fetchCompleted(images,tempCountSelected);
         }
     }
 }

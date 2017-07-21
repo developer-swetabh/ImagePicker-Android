@@ -22,6 +22,8 @@ public interface MultipleImagePickerContract {
     interface ActivityCommunicator extends BaseActivityCommunicator {
 
         void openImageSelectionFragment(String albumName);
+
+        void sendBackResult(ArrayList<String> selectedImagesPath);
     }
 
     interface AlbumPresenter extends BasePresenter {
@@ -53,6 +55,6 @@ public interface MultipleImagePickerContract {
 
         void someErrorOccured();
 
-        void fetchCompleted(ArrayList<Image> images);
+        void fetchCompleted(ArrayList<Image> images, int tempCountSelected);
     }
 }

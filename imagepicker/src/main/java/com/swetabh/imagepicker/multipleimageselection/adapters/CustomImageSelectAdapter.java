@@ -66,6 +66,7 @@ public class CustomImageSelectAdapter extends CustomGenericAdapter<Image> {
         arrayList.addAll(images);
     }
 
+
     private static class ViewHolder {
         public ImageView imageView;
         public View view;

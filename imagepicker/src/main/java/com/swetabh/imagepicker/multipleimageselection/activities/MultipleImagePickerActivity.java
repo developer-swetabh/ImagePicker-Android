@@ -14,6 +14,8 @@ import com.swetabh.imagepicker.multipleimageselection.fragments.imageselection.I
 import com.swetabh.imagepicker.multipleimageselection.fragments.imageselection.ImageSelectionPresenterImp;
 import com.swetabh.imagepicker.multipleimageselection.presenterandview.BaseView;
 
+import java.util.ArrayList;
+
 public class MultipleImagePickerActivity extends PickerBaseActivity
         implements MultipleImagePickerContract.ActivityCommunicator {
 
@@ -94,5 +96,13 @@ public class MultipleImagePickerActivity extends PickerBaseActivity
     @Override
     public void openImageSelectionFragment(String albumName) {
         attachFragment(ImageSelectionFragment.newInstance(albumName), new ImageSelectionPresenterImp(), MultipleImagePickerContract.FRAGMENT_IMAGE_SELECTION);
+    }
+
+    @Override
+    public void sendBackResult(ArrayList<String> selectedImagesPath) {
+        Intent intent = new Intent();
+        intent.putStringArrayListExtra(LibConstant.INTENT_EXTRA_IMAGES, selectedImagesPath);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

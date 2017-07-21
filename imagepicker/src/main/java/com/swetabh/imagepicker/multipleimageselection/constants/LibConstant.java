@@ -6,6 +6,8 @@ package com.swetabh.imagepicker.multipleimageselection.constants;
 
 public class LibConstant {
 
+    public static final int MULTIPLE_SELECT_REQ_CODE = 904;
+
     public static final String INTENT_EXTRA_ALBUM = "album";
     public static final String INTENT_EXTRA_IMAGES = "images";
     public static final String INTENT_EXTRA_LIMIT = "limit";

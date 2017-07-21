@@ -10,9 +10,11 @@
     <string name="permission_setting_info">App requires storage permission to view images. Please tap on \"open setting"\ to grant permission. </string>
     <string name="open_settings">OPEN SETTING</string>
     <string name="permission_package">package</string>
+    <string name="limit_exceeded">Can select a maximum of %d images</string>
 
     <string name="select_photo_album">Select Photo Album</string>
     <string name="error_null_cursor">Oops something error occurred !!!</string>
     <string name="selected">Selected</string>
     <string name="tap_to_select">Tap to select</string>
+    <string name="add">Add</string>
 </resources>
