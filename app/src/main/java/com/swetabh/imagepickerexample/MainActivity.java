@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImageView = (ImageView) findViewById(R.id.img_selected_image);
         mImagePathTv = (TextView) findViewById(R.id.txt_imagePath);
         findViewById(R.id.btn_gallery).setOnClickListener(this);
+        findViewById(R.id.btn_multiple).setOnClickListener(this);
         findViewById(R.id.btn_camera).setOnClickListener(this);
 
     }
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_gallery:
                 mPicker.pickImageFromGallery();
                 break;
+            case R.id.btn_multiple:
+                mPicker.pickMultipleImagesFromGallery();
+                break;
 
             case R.id.btn_camera:
                 mPicker.pickImageFromCamera();
@@ -47,8 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String imagePath = mPicker.onActivityResult(requestCode, resultCode, data);
-        mImagePathTv.setText(imagePath);
-        Glide.with(this).load(new File(imagePath)).into(mImageView);
+        if (requestCode == RESULT_OK) {
+            String imagePath = mPicker.onActivityResult(requestCode, resultCode, data);
+            mImagePathTv.setText(imagePath);
+            Glide.with(this).load(new File(imagePath)).into(mImageView);
+        }
     }
 }

@@ -29,6 +29,13 @@
         android:text="pick from gallery" />
 
     <Button
+        android:id="@+id/btn_multiple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="pick multiple images from gallery" />
+
+    <Button
         android:id="@+id/btn_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

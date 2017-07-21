@@ -2,6 +2,17 @@
     <string name="app_name">ImagePicker</string>
     <string name="Camera">Camera</string>
     <string name="Gallery">Gallery</string>
+
+    <!--for multiple image selection-->
     <string name="storage_denial">Storage permission is required in order to proceed,Please grant the permission in Application settings</string>
-    <!--<string name="provider_authorities">imagepicker.fileprovider</string>-->
+    <string name="permission_rationale_info">App requires storage permission to proceed further</string>
+    <string name="ok">OK</string>
+    <string name="permission_setting_info">App requires storage permission to view images. Please tap on \"open setting"\ to grant permission. </string>
+    <string name="open_settings">OPEN SETTING</string>
+    <string name="permission_package">package</string>
+
+    <string name="select_photo_album">Select Photo Album</string>
+    <string name="error_null_cursor">Oops something error occurred !!!</string>
+    <string name="selected">Selected</string>
+    <string name="tap_to_select">Tap to select</string>
 </resources>

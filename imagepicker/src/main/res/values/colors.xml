@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="multiple_image_select_primary">#2E7D32</color>
+    <color name="multiple_image_select_primaryDark">#1B5E20</color>
+    <color name="multiple_image_select_primaryLight">#C8E6C9</color>
+    <color name="multiple_image_select_accent">#4CAF50</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="bg_album_transparent">#a1000000</color>
+    <color name="black">#000000</color>
+</resources>

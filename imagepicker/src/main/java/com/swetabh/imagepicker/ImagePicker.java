@@ -16,6 +16,8 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.swetabh.imagepicker.multipleimageselection.activities.MultipleImagePickerActivity;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -207,5 +209,10 @@ public class ImagePicker {
             cursor.close();
         }
         return result;
+    }
+
+    public void pickMultipleImagesFromGallery() {
+        Intent intent = new Intent(activityWeakReference.get(), MultipleImagePickerActivity.class);
+        activityWeakReference.get().startActivity(intent);
     }
 }
