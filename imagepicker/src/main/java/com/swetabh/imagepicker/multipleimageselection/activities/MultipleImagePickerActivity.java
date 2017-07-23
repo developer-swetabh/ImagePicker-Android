@@ -48,7 +48,6 @@ public class MultipleImagePickerActivity extends PickerBaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-        checkPermission();
     }
 
     @Override
@@ -99,10 +98,23 @@ public class MultipleImagePickerActivity extends PickerBaseActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LibConstant.PERMISSION_REQ_CODE) {
+            checkPermission();
+        }
+    }
+
+    @Override
     public void sendBackResult(ArrayList<String> selectedImagesPath) {
         Intent intent = new Intent();
         intent.putStringArrayListExtra(LibConstant.INTENT_EXTRA_IMAGES, selectedImagesPath);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void checkStoragePermission() {
+        checkPermission();
     }
 }

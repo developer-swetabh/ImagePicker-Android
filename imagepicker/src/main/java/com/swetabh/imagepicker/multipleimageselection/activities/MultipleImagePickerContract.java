@@ -24,6 +24,8 @@ public interface MultipleImagePickerContract {
         void openImageSelectionFragment(String albumName);
 
         void sendBackResult(ArrayList<String> selectedImagesPath);
+
+        void checkStoragePermission();
     }
 
     interface AlbumPresenter extends BasePresenter {

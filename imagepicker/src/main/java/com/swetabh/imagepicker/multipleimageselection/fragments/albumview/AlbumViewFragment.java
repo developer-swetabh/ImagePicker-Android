@@ -67,11 +67,11 @@ public class AlbumViewFragment extends Fragment implements MultipleImagePickerCo
                 if (mCommunicator != null) {
                     mCommunicator.openImageSelectionFragment(mAlbumsList.get(position).name);
                 }
-               /* Intent intent = new Intent(getApplicationContext(), ImageSelectActivity.class);
-                intent.putExtra(LibConstant.INTENT_EXTRA_ALBUM, albums.get(position).name);
-                startActivityForResult(intent, Constants.REQUEST_CODE);*/
             }
         });
+        if (mCommunicator != null) {
+            mCommunicator.checkStoragePermission();
+        }
     }
 
     @Override
@@ -79,7 +79,6 @@ public class AlbumViewFragment extends Fragment implements MultipleImagePickerCo
         super.onResume();
         if (mPresenter != null) {
             mPresenter.start();
-            mPresenter.loadAlbum(mContext);
         }
     }
 
