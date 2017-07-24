@@ -106,13 +106,8 @@ public class AlbumViewFragment extends Fragment implements MultipleImagePickerCo
     }
 
     private void fetchStarted() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.VISIBLE);
-                gridView.setVisibility(View.INVISIBLE);
-            }
-        });
+        progressBar.setVisibility(View.VISIBLE);
+        gridView.setVisibility(View.INVISIBLE);
 
     }
 
@@ -124,29 +119,25 @@ public class AlbumViewFragment extends Fragment implements MultipleImagePickerCo
 
     @Override
     public void onErrorOccured() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
-                errorDisplay.setVisibility(View.VISIBLE);
-            }
-        });
+        progressBar.setVisibility(View.INVISIBLE);
+        errorDisplay.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void loadAlbums(final ArrayList<Album> albums) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter = new CustomAlbumSelectAdapter(mContext, albums);
-                gridView.setAdapter(adapter);
-                mAlbumsList = albums;
-                progressBar.setVisibility(View.INVISIBLE);
-                gridView.setVisibility(View.VISIBLE);
-                orientationBasedUI(getResources().getConfiguration().orientation);
-            }
-        });
+        if (adapter == null) {
+            mAlbumsList = albums;
+            adapter = new CustomAlbumSelectAdapter(mContext, mAlbumsList);
+        } else {
+            mAlbumsList = albums;
+            adapter.addAlbums(mAlbumsList);
+            adapter.notifyDataSetChanged();
+        }
+        gridView.setAdapter(adapter);
+        progressBar.setVisibility(View.INVISIBLE);
+        gridView.setVisibility(View.VISIBLE);
+        orientationBasedUI(getResources().getConfiguration().orientation);
 
     }
 
@@ -168,11 +159,11 @@ public class AlbumViewFragment extends Fragment implements MultipleImagePickerCo
         gridView.setNumColumns(orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 4);
     }
 
-    @Override
+   /* @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (adapter != null) {
             adapter.releaseResources();
         }
-    }
+    }*/
 }

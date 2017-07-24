@@ -184,7 +184,7 @@ public abstract class PickerBaseActivity extends AppCompatActivity {
                 attachView();
             }
             super.onBackPressed();
-            setResult(RESULT_CANCELED);
         }
+        setResult(RESULT_CANCELED);
     }
 }

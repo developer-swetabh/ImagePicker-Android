@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class AlbumPresenterImp extends BasePresenterImp<MultipleImagePickerContract.AlbumView>
         implements MultipleImagePickerContract.AlbumPresenter, AlbumResultCallback {
 
-    private Thread thread;
 
     @Override
     public void permissionGranted() {
@@ -33,39 +32,19 @@ public class AlbumPresenterImp extends BasePresenterImp<MultipleImagePickerContr
 
     @Override
     public void loadAlbum(Context context) {
-        startThread(new AlbumLoadRunnable(this,context));
-    }
-
-    private void startThread(Runnable runnable) {
-        stopThread();
-        thread = new Thread(runnable);
-        thread.start();
-
-    }
-
-    private void stopThread() {
-        if (thread == null || !thread.isAlive()) {
-            return;
-        }
-
-        thread.interrupt();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new AlbumLoadAsync(this, context).execute();
     }
 
     @Override
     public void onErrorOccured() {
-        if(mView!=null){
+        if (mView != null) {
             mView.onErrorOccured();
         }
     }
 
     @Override
     public void fetchCompleted(ArrayList<Album> albums) {
-        if(mView!=null){
+        if (mView != null) {
             mView.loadAlbums(albums);
         }
     }
